@@ -26,7 +26,7 @@ module.exports = class TestPlugin {
       const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
 
       manifest.version = semver.inc(manifest.version, bump);
-      auto.logger.log.info("Updated manifest.json version to: ", newVersions);
+      auto.logger.log.info("Updated manifest.json version to: ", manifest.version);
 
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
       await execPromise("git", ["add", manifestPath]);
