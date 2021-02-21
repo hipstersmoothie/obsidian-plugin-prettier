@@ -3,6 +3,7 @@
 .idea
 dist/
 prettier-format.zip
+.env
 
 # npm
 node_modules

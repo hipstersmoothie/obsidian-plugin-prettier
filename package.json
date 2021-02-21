@@ -6,7 +6,8 @@
   "scripts": {
     "start": "yarn build -w",
     "build": "mkdir -p dist && cp manifest.json dist && rollup --config rollup.config.js",
-    "lint": "eslint . --ext .ts,.tsx --fix"
+    "lint": "eslint . --ext .ts,.tsx --fix",
+    "release": "auto shipit"
   },
   "keywords": [
     "obsidian.md",
