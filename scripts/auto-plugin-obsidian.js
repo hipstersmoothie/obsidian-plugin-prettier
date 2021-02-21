@@ -26,6 +26,7 @@ module.exports = class TestPlugin {
       const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf-8"));
 
       manifest.version = semver.inc(manifest.version, bump);
+      auto.logger.log.info("Updated manifest.json version to: ", newVersions);
 
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
       await execPromise("git", ["add", manifestPath]);
@@ -36,7 +37,10 @@ module.exports = class TestPlugin {
 
       versions[manifest.version] = manifest.minAppVersion;
 
-      fs.writeFileSync(manifestPath, JSON.stringify(versions, null, 2));
+      const newVersions = JSON.stringify(versions, null, 2);
+      auto.logger.log.info("Updated versions.json: ", newVersions);
+
+      fs.writeFileSync(manifestPath, newVersions);
       await execPromise("git", ["add", versionsPath]);
 
       await execPromise("git", [
