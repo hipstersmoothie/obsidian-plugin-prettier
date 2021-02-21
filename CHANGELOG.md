@@ -1,3 +1,15 @@
+# v0.0.4 (Sun Feb 21 2021)
+
+#### ⚠️ Pushed to `main`
+
+- commit work ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # 0.0.3 (Sun Feb 21 2021)
 
 #### ⚠️ Pushed to `main`
