@@ -1,3 +1,17 @@
+# 0.0.7 (Sun Feb 21 2021)
+
+#### ⚠️ Pushed to `main`
+
+- fix log ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- commit and add right file ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- add logging ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # 0.0.6 (Sun Feb 21 2021)
 
 #### ⚠️ Pushed to `main`
