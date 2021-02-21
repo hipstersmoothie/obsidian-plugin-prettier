@@ -159,6 +159,8 @@ export default class PrettierPlugin extends Plugin {
 
       editor.setValue(formatted);
       editor.setCursor(cursorOffsetToPosition(formatted, cursorOffset));
+      const { left, top } = editor.getScrollInfo();
+      editor.scrollTo(left, top);
     }
   };
 
