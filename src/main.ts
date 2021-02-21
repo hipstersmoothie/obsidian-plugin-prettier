@@ -114,12 +114,16 @@ export default class PrettierPlugin extends Plugin {
         if (activeLeaf.view instanceof MarkdownView) {
           const editor = activeLeaf.view.sourceMode.cmEditor;
           const text = editor.getSelection();
-          const newText = prettier.format(text, {
+          const formatted = prettier.format(text, {
             parser: "markdown",
             plugins: [markdown],
           });
 
-          editor.replaceSelection(newText);
+          if (formatted === text) {
+            return;
+          }
+
+          editor.replaceSelection(formatted);
         }
       },
     });
@@ -148,6 +152,10 @@ export default class PrettierPlugin extends Plugin {
         plugins: [markdown],
         cursorOffset: position,
       });
+
+      if (formatted === text) {
+        return;
+      }
 
       editor.setValue(formatted);
       editor.setCursor(cursorOffsetToPosition(formatted, cursorOffset));
