@@ -34,17 +34,5 @@
     "rollup": "^2.32.1",
     "tslib": "^2.1.0",
     "typescript": "^4.1.5"
-  },
-  "auto": {
-    "plugins": [
-      "git-tag",
-      "released",
-      [
-        "upload-assets",
-        [
-          "./prettier-format.zip"
-        ]
-      ]
-    ]
   }
 }

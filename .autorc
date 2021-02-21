@@ -1,0 +1,13 @@
+{
+  "author": "Andrew Lisowski <lisowski54@gmail.com>",
+  "plugins": [
+    "git-tag",
+    "released",
+    [
+      "upload-assets",
+      [
+        "./prettier-format.zip"
+      ]
+    ]
+  ]
+}
