@@ -1,3 +1,17 @@
+# 0.0.4 (Sun Feb 21 2021)
+
+#### ⚠️ Pushed to `main`
+
+- fix import ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- correct version ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- commit work ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # v0.0.4 (Sun Feb 21 2021)
 
 #### ⚠️ Pushed to `main`
