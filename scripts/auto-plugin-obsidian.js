@@ -40,13 +40,13 @@ module.exports = class TestPlugin {
       const newVersions = JSON.stringify(versions, null, 2);
       auto.logger.log.info("Updated versions.json: ", newVersions);
 
-      fs.writeFileSync(manifestPath, newVersions);
+      fs.writeFileSync(versionsPath, newVersions);
       await execPromise("git", ["add", versionsPath]);
 
       await execPromise("git", [
         "commit",
         "-m",
-        '"Update CHANGELOG.md [skip ci]"',
+        '"Update version [skip ci]"',
         "--no-verify",
       ]);
     });
