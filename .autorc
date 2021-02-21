@@ -9,7 +9,7 @@
       [
         "./prettier-format.zip",
         "./dist/main.js",
-        "./dist/manifest.js"
+        "./dist/manifest.json"
       ]
     ]
   ]
