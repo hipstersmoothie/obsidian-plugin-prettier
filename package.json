@@ -1,6 +1,5 @@
 {
   "name": "obsidian-plugin-prettier",
-  "version": "0.11.0",
   "description": "Opinionated formatting for your obsidian.md notes.",
   "main": "main.js",
   "scripts": {
