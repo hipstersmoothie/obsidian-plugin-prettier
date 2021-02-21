@@ -3,6 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const semver = require("semver");
+const { execPromise } = require("auto");
 
 module.exports = class TestPlugin {
   constructor() {
@@ -27,6 +28,7 @@ module.exports = class TestPlugin {
       manifest.version = semver.inc(manifest.version, bump);
 
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+      await execPromise("git", ["add", manifestPath]);
 
       // Update the versions.json
       const versionsPath = path.join(__dirname, "../versions.json");
@@ -35,6 +37,14 @@ module.exports = class TestPlugin {
       versions[manifest.version] = manifest.minAppVersion;
 
       fs.writeFileSync(manifestPath, JSON.stringify(versions, null, 2));
+      await execPromise("git", ["add", versionsPath]);
+
+      await execPromise("git", [
+        "commit",
+        "-m",
+        '"Update CHANGELOG.md [skip ci]"',
+        "--no-verify",
+      ]);
     });
   }
 };
