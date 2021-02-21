@@ -1,3 +1,15 @@
+# 0.0.8 (Sun Feb 21 2021)
+
+#### ⚠️ Pushed to `main`
+
+- remove bad version entry ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # 0.0.7 (Sun Feb 21 2021)
 
 #### ⚠️ Pushed to `main`
