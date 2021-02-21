@@ -3,7 +3,7 @@
 const fs = require("fs");
 const path = require("path");
 const semver = require("semver");
-const { execPromise } = require("auto");
+const { execPromise } = require("@auto-it/core");
 
 module.exports = class TestPlugin {
   constructor() {
