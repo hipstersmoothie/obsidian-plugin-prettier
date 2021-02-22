@@ -96,8 +96,9 @@ export default class PrettierPlugin extends Plugin {
   public async onload(): Promise<void> {
     console.log("Load Prettier Format plugin");
 
-    this.settings = (await this.loadData()) || {};
-    this.saveData(this.settings);
+    this.settings = {
+      ...(await this.loadData()),
+    };
 
     this.addCommand({
       id: "format-note",
