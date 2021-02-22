@@ -161,7 +161,11 @@ export default class PrettierPlugin extends Plugin {
     cm: CodeMirror.Editor,
     event: KeyboardEvent
   ): void => {
-    if (this.settings.formatOnSave && event.metaKey && event.key === "s") {
+    if (
+      this.settings.formatOnSave &&
+      (event.ctrlKey || event.metaKey) &&
+      event.key === "s"
+    ) {
       this.formatAll();
     }
   };
