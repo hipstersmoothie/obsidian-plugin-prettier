@@ -61,7 +61,7 @@ class PrettierFormatSettingsTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Format on Save")
-      .setDesc("If enabled, format the current note on save")
+      .setDesc("If enabled, format the current note when you save the file via hotkey")
       .addToggle((toggle) =>
         toggle
           .setValue(this.plugin.settings.formatOnSave || false)
