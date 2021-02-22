@@ -109,10 +109,10 @@ export default class PrettierPlugin extends Plugin {
       id: "format-selection",
       name: "Format the just the selection in the note",
       callback: () => {
-        const activeLeaf = this.app.workspace.activeLeaf;
+        const activeLeaf = this.app.workspace.getActiveViewOfType(MarkdownView);
 
-        if (activeLeaf.view instanceof MarkdownView) {
-          const editor = activeLeaf.view.sourceMode.cmEditor;
+        if (activeLeaf instanceof MarkdownView) {
+          const editor = activeLeaf.sourceMode.cmEditor;
           const text = editor.getSelection();
           const formatted = prettier.format(text, {
             parser: "markdown",
@@ -140,10 +140,10 @@ export default class PrettierPlugin extends Plugin {
   }
 
   private readonly formatAll = (): void => {
-    const activeLeaf = this.app.workspace.activeLeaf;
+    const activeLeaf = this.app.workspace.getActiveViewOfType(MarkdownView);
 
-    if (activeLeaf.view instanceof MarkdownView) {
-      const editor = activeLeaf.view.sourceMode.cmEditor;
+    if (activeLeaf instanceof MarkdownView) {
+      const editor = activeLeaf.sourceMode.cmEditor;
       const text = editor.getValue();
       const cursor = editor.getCursor();
       const position = positionToCursorOffset(text, cursor);
