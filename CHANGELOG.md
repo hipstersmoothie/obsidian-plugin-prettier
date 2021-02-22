@@ -1,3 +1,15 @@
+# 0.0.12 (Mon Feb 22 2021)
+
+#### ⚠️ Pushed to `main`
+
+- use configured obisidian hotkey to detect formatOnSave ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # 0.0.11 (Mon Feb 22 2021)
 
 #### ⚠️ Pushed to `main`
