@@ -1,3 +1,19 @@
+# 0.0.11 (Mon Feb 22 2021)
+
+#### ⚠️ Pushed to `main`
+
+- improve format on save description ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- handle windows ctrl key ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- use iterateCodeMirrors to attach/detach keydown handler ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- update how settings are loaded ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- use API to get active workspace ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # 0.0.10 (Sun Feb 21 2021)
 
 #### ⚠️ Pushed to `main`
