@@ -14,6 +14,18 @@ export interface CursorPosition {
   ch: number;
 }
 
+interface Hotkey {
+  modifiers: ("Mod" | "Shift" | "Alt" | "Ctrl")[];
+  key: string;
+}
+
+type HotkeyMap = Record<string, Hotkey[]>;
+
+interface HotkeyManager {
+  customKeys?: HotkeyMap;
+  defaultKeys: HotkeyMap;
+}
+
 const positionToCursorOffset = (
   code: string,
   { line, ch }: CursorPosition
@@ -61,7 +73,9 @@ class PrettierFormatSettingsTab extends PluginSettingTab {
 
     new Setting(containerEl)
       .setName("Format on Save")
-      .setDesc("If enabled, format the current note when you save the file via hotkey")
+      .setDesc(
+        "If enabled, format the current note when you save the file via hotkey"
+      )
       .addToggle((toggle) =>
         toggle
           .setValue(this.plugin.settings.formatOnSave || false)
@@ -80,6 +94,7 @@ interface PrettierPluginSettings {
 
 export default class PrettierPlugin extends Plugin {
   public settings: PrettierPluginSettings = {};
+  private saveHotkey: Hotkey[] | undefined;
 
   public async onload(): Promise<void> {
     console.log("Load Prettier Format plugin");
@@ -122,6 +137,18 @@ export default class PrettierPlugin extends Plugin {
     this.registerCodeMirror((cm) => {
       cm.on("keydown", this.handleKeyDown);
     });
+
+    const hotkeyManager: HotkeyManager = (this.app as any).hotkeyManager;
+    const hotKeyEntry =
+      (hotkeyManager.customKeys &&
+        Object.entries(hotkeyManager.customKeys).find(
+          ([name]) => name === "editor:save-file"
+        )) ||
+      Object.entries(hotkeyManager.defaultKeys).find(
+        ([name]) => name === "editor:save-file"
+      ) ||
+      [];
+    this.saveHotkey = hotKeyEntry[1];
   }
 
   public onunload(): void {
@@ -161,11 +188,35 @@ export default class PrettierPlugin extends Plugin {
     cm: CodeMirror.Editor,
     event: KeyboardEvent
   ): void => {
-    if (
-      this.settings.formatOnSave &&
-      (event.ctrlKey || event.metaKey) &&
-      event.key === "s"
-    ) {
+    if (!this.saveHotkey) {
+      return;
+    }
+
+    const wasSave = this.saveHotkey.some((hotkey) => {
+      const hasAllModifiers = hotkey.modifiers.every((modifier) => {
+        if (modifier === "Mod") {
+          return event.metaKey;
+        }
+
+        if (modifier === "Shift") {
+          return event.shiftKey;
+        }
+
+        if (modifier === "Ctrl") {
+          return event.ctrlKey;
+        }
+
+        if (modifier === "Alt") {
+          return event.altKey;
+        }
+      });
+
+      return (
+        event.key.toLowerCase() === hotkey.key.toLowerCase() && hasAllModifiers
+      );
+    });
+
+    if (this.settings.formatOnSave && wasSave) {
       this.formatAll();
     }
   };
