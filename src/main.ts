@@ -80,18 +80,6 @@ interface PrettierPluginSettings {
 
 export default class PrettierPlugin extends Plugin {
   public settings: PrettierPluginSettings = {};
-  private readonly cmEditors: CodeMirror.Editor[];
-
-  constructor(app: App, plugin: PluginManifest) {
-    super(app, plugin);
-
-    this.cmEditors = [];
-
-    this.registerCodeMirror((cm) => {
-      this.cmEditors.push(cm);
-      cm.on("keydown", this.handleKeyDown);
-    });
-  }
 
   public async onload(): Promise<void> {
     console.log("Load Prettier Format plugin");
@@ -130,12 +118,16 @@ export default class PrettierPlugin extends Plugin {
     });
 
     this.addSettingTab(new PrettierFormatSettingsTab(this.app, this));
+
+    this.registerCodeMirror((cm) => {
+      cm.on("keydown", this.handleKeyDown);
+    });
   }
 
   public onunload(): void {
     console.log("Unloading Prettier Format plugin");
 
-    this.cmEditors.forEach((cm) => {
+    this.app.workspace.iterateCodeMirrors((cm) => {
       cm.off("keydown", this.handleKeyDown);
     });
   }
