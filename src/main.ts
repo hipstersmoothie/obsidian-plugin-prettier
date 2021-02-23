@@ -113,17 +113,16 @@ export default class PrettierPlugin extends Plugin {
       id: "format-selection",
       name: "Format the just the selection in the note",
       callback: () => {
-        const activeLeaf = this.app.workspace.getActiveViewOfType(MarkdownView);
+        const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
 
-        if (activeLeaf instanceof MarkdownView) {
-          const editor = activeLeaf.sourceMode.cmEditor;
+        if (activeView) {
+          const editor = activeView.sourceMode.cmEditor;
           const text = editor.getSelection();
           const formatted = fixListItemIndent(
             prettier.format(text, {
               parser: "markdown",
               plugins: [markdown],
-              tabWidth: this.tabSize,
-              useTabs: this.indentWithTabs,
+              ...this.getPrettierSettings(editor),
             })
           );
 
@@ -139,10 +138,6 @@ export default class PrettierPlugin extends Plugin {
     this.addSettingTab(new PrettierFormatSettingsTab(this.app, this));
 
     this.registerCodeMirror((cm) => {
-      this.tabSize = cm.getOption("tabSize") || 4;
-      const indentWithTabs = cm.getOption("indentWithTabs");
-      this.indentWithTabs =
-        typeof indentWithTabs === "boolean" ? indentWithTabs : true;
       cm.on("keydown", this.handleKeyDown);
     });
 
@@ -167,11 +162,18 @@ export default class PrettierPlugin extends Plugin {
     });
   }
 
-  private readonly formatAll = (): void => {
-    const activeLeaf = this.app.workspace.getActiveViewOfType(MarkdownView);
+  private getPrettierSettings = (cm: CodeMirror.Editor) => {
+    const tabWidth = cm.getOption("tabSize") || 4;
+    const useTabs = cm.getOption("indentWithTabs") ?? true;
 
-    if (activeLeaf instanceof MarkdownView) {
-      const editor = activeLeaf.sourceMode.cmEditor;
+    return { tabWidth, useTabs };
+  };
+
+  private readonly formatAll = (): void => {
+    const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
+
+    if (activeView) {
+      const editor = activeView.sourceMode.cmEditor;
       const text = editor.getValue();
       const cursor = editor.getCursor();
       const position = positionToCursorOffset(text, cursor);
@@ -182,8 +184,7 @@ export default class PrettierPlugin extends Plugin {
         parser: "markdown",
         plugins: [markdown],
         cursorOffset: position,
-        tabWidth: this.tabSize,
-        useTabs: this.indentWithTabs,
+        ...this.getPrettierSettings(editor),
       });
       const formatted = fixListItemIndent(rawFormatted);
 
