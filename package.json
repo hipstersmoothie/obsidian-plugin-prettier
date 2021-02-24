@@ -16,8 +16,6 @@
   "repository": "hipstersmoothie/",
   "license": "MIT",
   "devDependencies": {
-    "@auto-it/git-tag": "^10.16.7",
-    "@auto-it/upload-assets": "^10.16.7",
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@rollup/plugin-typescript": "^6.0.0",
@@ -26,6 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "auto": "^10.16.7",
+    "auto-plugin-obsidian": "^0.1.4",
     "eslint": "7.12.1",
     "eslint-config-prettier": "^7.2.0",
     "obsidian": "https://github.com/obsidianmd/obsidian-api/archive/7f3927722e1bdd791119727236a12bb10763dd04.tar.gz",

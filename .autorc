@@ -1,16 +1,13 @@
 {
   "author": "Andrew Lisowski <lisowski54@gmail.com>",
   "plugins": [
-    "./scripts/auto-plugin-obsidian",
-    "git-tag",
-    "released",
     [
-      "upload-assets",
-      [
-        "./prettier-format.zip",
-        "./dist/main.js",
-        "./dist/manifest.json"
-      ]
-    ]
+      "obsidian",
+      {
+        "dir": "dist",
+        "zip": true
+      }
+    ],
+    "released"
   ]
 }
