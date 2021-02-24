@@ -1,3 +1,15 @@
+# 0.0.15 (Wed Feb 24 2021)
+
+#### ⚠️ Pushed to `main`
+
+- patch save callback instead of hotkey ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # 0.0.14 (Tue Feb 23 2021)
 
 #### ⚠️ Pushed to `main`
