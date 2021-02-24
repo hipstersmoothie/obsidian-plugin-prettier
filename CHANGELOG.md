@@ -1,3 +1,15 @@
+# 0.0.16 (Wed Feb 24 2021)
+
+#### ⚠️ Pushed to `main`
+
+- move to published auto plugin ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 1
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # 0.0.15 (Wed Feb 24 2021)
 
 #### ⚠️ Pushed to `main`
