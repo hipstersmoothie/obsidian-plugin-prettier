@@ -3,8 +3,8 @@
   "description": "Opinionated formatting for your obsidian.md notes.",
   "main": "main.js",
   "scripts": {
-    "start": "obsidian-plugin dev --esbuild-override=esbuild.config.json src/main.ts",
-    "build": "obsidian-plugin build --esbuild-override=esbuild.config.json src/main.ts",
+    "start": "obsidian-plugin dev src/main.ts",
+    "build": "obsidian-plugin build src/main.ts",
     "lint": "eslint . --ext .ts,.tsx --fix",
     "release": "auto shipit"
   },
@@ -24,8 +24,8 @@
     "auto-plugin-obsidian": "^0.1.4",
     "eslint": "7.12.1",
     "eslint-config-prettier": "^7.2.0",
-    "obsidian": "https://github.com/obsidianmd/obsidian-api/archive/7f3927722e1bdd791119727236a12bb10763dd04.tar.gz",
-    "obsidian-plugin-cli": "^0.4.0",
+    "obsidian": "obsidianmd/obsidian-api",
+    "obsidian-plugin-cli": "^0.4.2",
     "prettier": "^2.2.1",
     "tslib": "^2.1.0",
     "typescript": "^4.1.5"

@@ -837,7 +837,7 @@ configstore@^5.0.1:
     write-file-atomic "^3.0.0"
     xdg-basedir "^4.0.0"
 
-cosmiconfig@7.0.0:
+cosmiconfig@7.0.0, cosmiconfig@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-7.0.0.tgz#ef9b44d773959cae63ddecd122de23853b60f8d3"
   integrity sha512-pondGvTuVYDk++upghXJabWzL6Kxu6f26ljFw64Swq9v6sQPUL3EUlVDV56diOjpCayKihL6hVe8exIACU4XcA==
@@ -1875,15 +1875,16 @@ objectorarray@^1.0.4:
   resolved "https://registry.yarnpkg.com/objectorarray/-/objectorarray-1.0.4.tgz#d69b2f0ff7dc2701903d308bb85882f4ddb49483"
   integrity sha512-91k8bjcldstRz1bG6zJo8lWD7c6QXcB4nTDUqiEvIL1xAsLoZlOOZZG+nd6YPz+V7zY1580J4Xxh1vZtyv4i/w==
 
-obsidian-plugin-cli@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/obsidian-plugin-cli/-/obsidian-plugin-cli-0.4.0.tgz#125f48a52aade63d690c3f0443aa8a33121a279f"
-  integrity sha512-NhRtoiwG8TRjPgnpXz2U8wbyZf6sITTPMVWgqFNpm3fyx81d8Uw87zFi6bZ+pBDOxpBu11LZph11EMkFVhkNSA==
+obsidian-plugin-cli@^0.4.2:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/obsidian-plugin-cli/-/obsidian-plugin-cli-0.4.2.tgz#2cfe0200c1eba2dd2216227bc55a5e70c1740f3e"
+  integrity sha512-QckkteleL57jn+7L9+ZJ9K3qVv7sBTiPjYu/u+W0lqa/hz4YsO7nrTWGTPPpAXHy3xPYdDN2mseJ//aLrRF9ag==
   dependencies:
     "@oclif/command" "^1"
     "@oclif/config" "^1"
     "@oclif/plugin-help" "^3"
     ansi-colors "^4.1.1"
+    cosmiconfig "^7.0.0"
     dedent "^0.7.0"
     esbuild "^0.8.48"
     obsidian-utils "^0.8.0"
@@ -1899,9 +1900,9 @@ obsidian-utils@^0.8.0:
     date-fns "^2.17.0"
     node-fetch "^2.6.1"
 
-"obsidian@https://github.com/obsidianmd/obsidian-api/archive/7f3927722e1bdd791119727236a12bb10763dd04.tar.gz":
-  version "0.10.9"
-  resolved "https://github.com/obsidianmd/obsidian-api/archive/7f3927722e1bdd791119727236a12bb10763dd04.tar.gz#2db949ea51191b31148ea5f4075901c37c41255f"
+obsidian@obsidianmd/obsidian-api:
+  version "0.11.0"
+  resolved "https://codeload.github.com/obsidianmd/obsidian-api/tar.gz/81ab85ade4552c9116c1e10d009127e62019c923"
   dependencies:
     "@types/codemirror" "0.0.98"
 
