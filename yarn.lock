@@ -1875,10 +1875,10 @@ objectorarray@^1.0.4:
   resolved "https://registry.yarnpkg.com/objectorarray/-/objectorarray-1.0.4.tgz#d69b2f0ff7dc2701903d308bb85882f4ddb49483"
   integrity sha512-91k8bjcldstRz1bG6zJo8lWD7c6QXcB4nTDUqiEvIL1xAsLoZlOOZZG+nd6YPz+V7zY1580J4Xxh1vZtyv4i/w==
 
-obsidian-plugin-cli@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/obsidian-plugin-cli/-/obsidian-plugin-cli-0.4.2.tgz#2cfe0200c1eba2dd2216227bc55a5e70c1740f3e"
-  integrity sha512-QckkteleL57jn+7L9+ZJ9K3qVv7sBTiPjYu/u+W0lqa/hz4YsO7nrTWGTPPpAXHy3xPYdDN2mseJ//aLrRF9ag==
+obsidian-plugin-cli@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/obsidian-plugin-cli/-/obsidian-plugin-cli-0.4.3.tgz#10a17c27be9e94d481b9cc63ea3c3c7005ca70a7"
+  integrity sha512-smy3wOI7q3vjhkRfOuq9YITV4Lfj0qJI+PQhDuU9PyBkXesnjFAmndANphSuWJXvIEMLh22TvuzHo4UOtoenQw==
   dependencies:
     "@oclif/command" "^1"
     "@oclif/config" "^1"
