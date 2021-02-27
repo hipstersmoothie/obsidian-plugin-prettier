@@ -1,3 +1,21 @@
+# 0.0.17 (Sat Feb 27 2021)
+
+#### ⚠️ Pushed to `main`
+
+- clean up code ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- more detailed install instructions ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### 🏠 Internal
+
+- Remove rollup, add obsidian-plugin-cli [#1](https://github.com/hipstersmoothie/obsidian-plugin-prettier/pull/1) ([@zephraph](https://github.com/zephraph))
+
+#### Authors: 2
+
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+- Justin Bennett ([@zephraph](https://github.com/zephraph))
+
+---
+
 # 0.0.16 (Wed Feb 24 2021)
 
 #### ⚠️ Pushed to `main`
