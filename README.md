@@ -17,4 +17,8 @@ And the following settings:
 
 ## Installing
 
-Unzip the [latest release](https://github.com/argenos/hotkeysplus-obsidian/releases/latest) into your `<vault>/.obsidian/plugins/` folder.
+Either install the latest release from Obsidian directly or unzip the [latest release](https://github.com/hipstersmoothie/obsidian-plugin-prettier/releases/latest) into your `<vault>/.obsidian/plugins/` folder.
+
+Once the plugin is installed, you need to make sure that the switch for "Prettier Format" is turned on.
+After you are all setup you would see this plugins commands in the command palette (`CMD + P`).
+You can assign the commands to hotkeys for easy usage.
