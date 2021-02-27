@@ -7,18 +7,6 @@ export interface CursorPosition {
   ch: number;
 }
 
-interface Hotkey {
-  modifiers: ("Mod" | "Shift" | "Alt" | "Ctrl")[];
-  key: string;
-}
-
-type HotkeyMap = Record<string, Hotkey[]>;
-
-interface HotkeyManager {
-  customKeys?: HotkeyMap;
-  defaultKeys: HotkeyMap;
-}
-
 const positionToCursorOffset = (
   code: string,
   { line, ch }: CursorPosition
@@ -92,7 +80,6 @@ const fixListItemIndent = (text: string): string => {
 
 export default class PrettierPlugin extends Plugin {
   public settings: PrettierPluginSettings = {};
-  private saveCallback = () => undefined;
 
   public async onload(): Promise<void> {
     console.log("Load Prettier Format plugin");
@@ -135,12 +122,13 @@ export default class PrettierPlugin extends Plugin {
 
     this.addSettingTab(new PrettierFormatSettingsTab(this.app, this));
 
-    const save = (this.saveCallback = (this.app as any).commands?.commands?.[
+    const saveCommandDefinition = (this.app as any).commands?.commands?.[
       "editor:save-file"
-    ]?.callback);
+    ];
+    const save = saveCommandDefinition?.callback;
 
-    if (save) {
-      (this.app as any).commands.commands["editor:save-file"].callback = () => {
+    if (typeof save === "function") {
+      saveCommandDefinition.callback = () => {
         if (this.settings.formatOnSave) {
           this.formatAll();
         }
