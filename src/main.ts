@@ -1,6 +1,9 @@
 import { App, MarkdownView, Plugin, PluginSettingTab, Setting } from "obsidian";
 import * as prettier from "prettier";
+import { Options, CursorOptions } from "prettier"
 import markdown from "prettier/parser-markdown";
+import babel from "prettier/parser-babel";
+import html from "prettier/parser-html";
 
 export interface CursorPosition {
   line: number;
@@ -66,11 +69,27 @@ class PrettierFormatSettingsTab extends PluginSettingTab {
             this.display();
           })
       );
+    
+    new Setting(containerEl)
+    .setName("Format code block")
+    .setDesc(
+      "If enabled, format the code block(just support js, html)"
+    )
+    .addToggle((toggle) =>
+      toggle
+        .setValue(this.plugin.settings.FormatCodeBlock || false)
+        .onChange((value) => {
+          this.plugin.settings.FormatCodeBlock = value;
+          this.plugin.saveData(this.plugin.settings);
+          this.display();
+        })
+    );
   }
 }
 
 interface PrettierPluginSettings {
   formatOnSave?: boolean;
+  FormatCodeBlock?: boolean;
 }
 
 // There is a prettier bug where they add extra space after a list item
@@ -106,9 +125,9 @@ export default class PrettierPlugin extends Plugin {
           const formatted = fixListItemIndent(
             prettier.format(text, {
               parser: "markdown",
-              plugins: [markdown],
+              plugins: [markdown, babel, html],
               ...this.getPrettierSettings(editor),
-            })
+            } as Options)
           );
 
           if (formatted === text) {
@@ -141,8 +160,9 @@ export default class PrettierPlugin extends Plugin {
   private getPrettierSettings = (cm: CodeMirror.Editor) => {
     const tabWidth = cm.getOption("tabSize") || 4;
     const useTabs = cm.getOption("indentWithTabs") ?? true;
+    const embeddedLanguageFormatting = this.settings.FormatCodeBlock ? "auto": "off"
 
-    return { tabWidth, useTabs };
+    return { tabWidth, useTabs,embeddedLanguageFormatting };
   };
 
   private readonly formatAll = (): void => {
@@ -158,10 +178,10 @@ export default class PrettierPlugin extends Plugin {
         cursorOffset,
       } = prettier.formatWithCursor(text, {
         parser: "markdown",
-        plugins: [markdown],
+        plugins: [markdown, babel, html],
         cursorOffset: position,
         ...this.getPrettierSettings(editor),
-      });
+      } as CursorOptions);
       const formatted = fixListItemIndent(rawFormatted);
 
       if (formatted === text) {
