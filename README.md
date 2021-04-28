@@ -11,9 +11,19 @@ This plugin exposes the following commands:
 
 And the following settings:
 
-| Setting        | Default |
-| -------------- | ------- |
-| Format on Save | false   |
+| Setting           | Default |
+| ----------------- | ------- |
+| Format on Save    | false   |
+| Format code block | false   |
+
+And the following Front-matter, you can use this setting to control one file.
+
+```yaml
+---
+plugin-prettier: true
+---
+
+```
 
 ## Installing
 
