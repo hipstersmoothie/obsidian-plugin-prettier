@@ -16,7 +16,7 @@ And the following settings:
 | Format on Save    | false   |
 | Format code block | false   |
 
-And the following Front-matter, you can use this setting to control one file.
+Add the following to your note's front-matter to enable this plugin for a specific file.
 
 ```yaml
 ---
