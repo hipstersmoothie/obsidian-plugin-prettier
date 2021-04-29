@@ -1,3 +1,16 @@
+# 0.1.0 (Thu Apr 29 2021)
+
+#### 🚀 Enhancement
+
+- feat: use `plugin-prettier` control one file format or not [#3](https://github.com/hipstersmoothie/obsidian-plugin-prettier/pull/3) ([@renmu123](https://github.com/renmu123) [@hipstersmoothie](https://github.com/hipstersmoothie))
+
+#### Authors: 2
+
+- [@renmu123](https://github.com/renmu123)
+- Andrew Lisowski ([@hipstersmoothie](https://github.com/hipstersmoothie))
+
+---
+
 # 0.0.18 (Mon Apr 26 2021)
 
 #### 🐛 Bug Fix
