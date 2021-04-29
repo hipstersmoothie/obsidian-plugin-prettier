@@ -110,32 +110,16 @@ export default class PrettierPlugin extends Plugin {
     this.addCommand({
       id: "format-note",
       name: "Format the entire note",
-      callback: this.formatAll,
+      callback: () => {
+        this.format("all")
+      }
     });
 
     this.addCommand({
       id: "format-selection",
       name: "Format the just the selection in the note",
       callback: () => {
-        const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
-
-        if (activeView) {
-          const editor = activeView.sourceMode.cmEditor;
-          const text = editor.getSelection();
-          const formatted = fixListItemIndent(
-            prettier.format(text, {
-              parser: "markdown",
-              plugins: [markdown, babel, html],
-              ...this.getPrettierSettings(editor),
-            } as Options)
-          );
-
-          if (formatted === text) {
-            return;
-          }
-
-          editor.replaceSelection(formatted);
-        }
+        this.format("selection")
       },
     });
 
@@ -149,7 +133,7 @@ export default class PrettierPlugin extends Plugin {
     if (typeof save === "function") {
       saveCommandDefinition.callback = () => {
         if (this.settings.formatOnSave) {
-          this.formatAll();
+          this.format("all");
         }
 
         save();
@@ -165,33 +149,73 @@ export default class PrettierPlugin extends Plugin {
     return { tabWidth, useTabs,embeddedLanguageFormatting };
   };
 
-  private readonly formatAll = (): void => {
-    const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
+  private readonly formatAll = (editor: CodeMirror.Editor): void => {
+    const text = editor.getValue();
+    const cursor = editor.getCursor();
+    const position = positionToCursorOffset(text, cursor);
+    const {
+      formatted: rawFormatted,
+      cursorOffset,
+    } = prettier.formatWithCursor(text, {
+      parser: "markdown",
+      plugins: [markdown, babel, html],
+      cursorOffset: position,
+      ...this.getPrettierSettings(editor),
+    } as CursorOptions);
+    const formatted = fixListItemIndent(rawFormatted);
 
-    if (activeView) {
-      const editor = activeView.sourceMode.cmEditor;
-      const text = editor.getValue();
-      const cursor = editor.getCursor();
-      const position = positionToCursorOffset(text, cursor);
-      const {
-        formatted: rawFormatted,
-        cursorOffset,
-      } = prettier.formatWithCursor(text, {
+    if (formatted === text) {
+      return;
+    }
+
+    const { left, top } = editor.getScrollInfo();
+    editor.setValue(formatted);
+    editor.setCursor(cursorOffsetToPosition(formatted, cursorOffset));
+    editor.scrollTo(left, top);
+  };
+  
+  formatSelection(editor: CodeMirror.Editor): void {
+    const text = editor.getSelection();
+    const formatted = fixListItemIndent(
+      prettier.format(text, {
         parser: "markdown",
         plugins: [markdown, babel, html],
-        cursorOffset: position,
         ...this.getPrettierSettings(editor),
-      } as CursorOptions);
-      const formatted = fixListItemIndent(rawFormatted);
+      } as Options)
+    );
 
-      if (formatted === text) {
-        return;
-      }
-
-      editor.setValue(formatted);
-      editor.setCursor(cursorOffsetToPosition(formatted, cursorOffset));
-      const { left, top } = editor.getScrollInfo();
-      editor.scrollTo(left, top);
+    if (formatted === text) {
+      return;
     }
-  };
+
+    editor.replaceSelection(formatted);
+  }
+
+  format(type: string): void {
+    const allowFormat = this.getFrontmatterValue("plugin-prettier", true);
+    console.log(allowFormat)
+    const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
+
+    if(activeView && allowFormat === true){
+      const editor: CodeMirror.Editor = activeView.sourceMode.cmEditor;
+
+      if(type === "all"){
+        this.formatAll(editor)
+      }
+      else{
+        this.formatSelection(editor)
+      }
+    }
+  }
+
+  getFrontmatterValue(key: string, defaultValue: any = undefined): any {
+    const path = this.app.workspace.getActiveFile().path;
+    const cache = this.app.metadataCache.getCache(path);
+
+    let value = defaultValue;
+    if (cache?.frontmatter && cache.frontmatter.hasOwnProperty(key)) {
+        value = cache.frontmatter[key];
+    }
+    return value;
+  }
 }

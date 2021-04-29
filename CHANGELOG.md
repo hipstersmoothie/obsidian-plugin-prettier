@@ -2,12 +2,12 @@
 
 #### 🐛 Bug Fix
 
-- support code block format(js,html) [#2](https://github.com/hipstersmoothie/obsidian-plugin-prettier/pull/2) (19961017fyx [@renmu123](https://github.com/renmu123))
+- support code block format(js,html) [#2](https://github.com/hipstersmoothie/obsidian-plugin-prettier/pull/2) ([@renmu123](https://github.com/renmu123))
 
 #### Authors: 2
 
 - [@renmu123](https://github.com/renmu123)
-- renmu123 (19961017fyx)
+- renmu123
 
 ---
 

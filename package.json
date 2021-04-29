@@ -24,10 +24,10 @@
     "auto-plugin-obsidian": "^0.1.4",
     "eslint": "7.12.1",
     "eslint-config-prettier": "^7.2.0",
-    "obsidian": "obsidianmd/obsidian-api",
-    "obsidian-plugin-cli": "^0.4.3",
+    "obsidian": "^0.12.0",
+    "obsidian-plugin-cli": "^0.5.1",
     "prettier": "^2.2.1",
-    "tslib": "^2.1.0",
-    "typescript": "^4.1.5"
+    "tslib": "^2.2.0",
+    "typescript": "^4.2.4"
   }
 }

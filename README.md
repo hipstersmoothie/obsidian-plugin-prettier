@@ -11,9 +11,19 @@ This plugin exposes the following commands:
 
 And the following settings:
 
-| Setting        | Default |
-| -------------- | ------- |
-| Format on Save | false   |
+| Setting           | Default |
+| ----------------- | ------- |
+| Format on Save    | false   |
+| Format code block | false   |
+
+Add the following to your note's front-matter to enable this plugin for a specific file.
+
+```yaml
+---
+plugin-prettier: true
+---
+
+```
 
 ## Installing
 
