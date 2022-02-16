@@ -142,8 +142,8 @@ export default class PrettierPlugin extends Plugin {
   }
 
   private getPrettierSettings = (cm: CodeMirror.Editor) => {
-    const tabWidth = cm.getOption("tabSize") || 4;
-    const useTabs = cm.getOption("indentWithTabs") ?? true;
+    const tabWidth = 4;
+    const useTabs = false;
     const embeddedLanguageFormatting = this.settings.FormatCodeBlock ? "auto": "off"
 
     return { tabWidth, useTabs,embeddedLanguageFormatting };
