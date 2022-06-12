@@ -1,4 +1,4 @@
-import { App, MarkdownView, Plugin, PluginSettingTab, Setting } from "obsidian";
+import { App, MarkdownView, Notice, Plugin, PluginSettingTab, Setting } from "obsidian";
 import * as prettier from "prettier";
 import { Options, CursorOptions } from "prettier"
 import markdown from "prettier/parser-markdown";
@@ -201,9 +201,13 @@ export default class PrettierPlugin extends Plugin {
 
       if(type === "all"){
         this.formatAll(editor)
+
+        new Notice("Prettier: entire note formatted.", 2000)
       }
       else{
         this.formatSelection(editor)
+
+        new Notice("Prettier: selection formatted.", 2000)
       }
     }
   }
