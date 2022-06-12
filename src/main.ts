@@ -202,12 +202,12 @@ export default class PrettierPlugin extends Plugin {
       if(type === "all"){
         this.formatAll(editor)
 
-        new Notice("Prettier: entire note formatted.");
+        new Notice("Prettier: entire note formatted.", 2000)
       }
       else{
         this.formatSelection(editor)
 
-        new Notice("Prettier: selection formatted.");
+        new Notice("Prettier: selection formatted.", 2000)
       }
     }
   }
