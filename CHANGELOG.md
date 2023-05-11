@@ -1,3 +1,15 @@
+# 0.1.1 (Thu May 11 2023)
+
+#### 🐛 Bug Fix
+
+- Use new APIs to get Editor config for tabs. [#11](https://github.com/hipstersmoothie/obsidian-plugin-prettier/pull/11) ([@crhallberg](https://github.com/crhallberg))
+
+#### Authors: 1
+
+- Chris Hallberg ([@crhallberg](https://github.com/crhallberg))
+
+---
+
 # 0.1.0 (Thu Apr 29 2021)
 
 #### 🚀 Enhancement
