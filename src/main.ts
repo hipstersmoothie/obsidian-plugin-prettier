@@ -1,4 +1,4 @@
-import { App, MarkdownView, Plugin, PluginSettingTab, Setting } from "obsidian";
+import { App, Editor, MarkdownView, Plugin, PluginSettingTab, Setting } from "obsidian";
 import * as prettier from "prettier";
 import { Options, CursorOptions } from "prettier"
 import markdown from "prettier/parser-markdown";
@@ -110,16 +110,16 @@ export default class PrettierPlugin extends Plugin {
     this.addCommand({
       id: "format-note",
       name: "Format the entire note",
-      callback: () => {
-        this.format("all")
+      editorCallback: (editor: Editor) => {
+        this.format("all", editor)
       }
     });
 
     this.addCommand({
       id: "format-selection",
       name: "Format the just the selection in the note",
-      callback: () => {
-        this.format("selection")
+      editorCallback: (editor: Editor) => {
+        this.format("selection", editor)
       },
     });
 
@@ -133,26 +133,27 @@ export default class PrettierPlugin extends Plugin {
     if (typeof save === "function") {
       saveCommandDefinition.callback = () => {
         if (this.settings.formatOnSave) {
-          this.format("all");
-        }
+          const editor = this.app.workspace.getActiveViewOfType(MarkdownView).editor;
 
-        save();
+          this.format("all", editor);
+        }
       };
     }
   }
 
-  private getPrettierSettings = (cm: CodeMirror.Editor) => {
-    const tabWidth = cm.getOption("tabSize") || 4;
-    const useTabs = cm.getOption("indentWithTabs") ?? true;
+  private getPrettierSettings = () => {
+    const tabWidth = this.app.vault.getConfig("tabSize") ?? 4;
+    const useTabs = this.app.vault.getConfig("useTab") ?? true;
     const embeddedLanguageFormatting = this.settings.FormatCodeBlock ? "auto": "off"
 
-    return { tabWidth, useTabs,embeddedLanguageFormatting };
+    return { tabWidth, useTabs, embeddedLanguageFormatting };
   };
 
-  private readonly formatAll = (editor: CodeMirror.Editor): void => {
+  private readonly formatAll = (editor: Editor): void => {
     const text = editor.getValue();
     const cursor = editor.getCursor();
     const position = positionToCursorOffset(text, cursor);
+
     const {
       formatted: rawFormatted,
       cursorOffset,
@@ -160,8 +161,9 @@ export default class PrettierPlugin extends Plugin {
       parser: "markdown",
       plugins: [markdown, babel, html],
       cursorOffset: position,
-      ...this.getPrettierSettings(editor),
+      ...this.getPrettierSettings(),
     } as CursorOptions);
+
     const formatted = fixListItemIndent(rawFormatted);
 
     if (formatted === text) {
@@ -174,13 +176,13 @@ export default class PrettierPlugin extends Plugin {
     editor.scrollTo(left, top);
   };
   
-  formatSelection(editor: CodeMirror.Editor): void {
+  formatSelection(editor: Editor): void {
     const text = editor.getSelection();
     const formatted = fixListItemIndent(
       prettier.format(text, {
         parser: "markdown",
         plugins: [markdown, babel, html],
-        ...this.getPrettierSettings(editor),
+        ...this.getPrettierSettings(),
       } as Options)
     );
 
@@ -191,14 +193,11 @@ export default class PrettierPlugin extends Plugin {
     editor.replaceSelection(formatted);
   }
 
-  format(type: string): void {
+  format(type: string, editor: Editor): void {
     const allowFormat = this.getFrontmatterValue("plugin-prettier", true);
     console.log(allowFormat)
-    const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
 
-    if(activeView && allowFormat === true){
-      const editor: CodeMirror.Editor = activeView.sourceMode.cmEditor;
-
+    if(editor && allowFormat === true){
       if(type === "all"){
         this.formatAll(editor)
       }
