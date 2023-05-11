@@ -6,6 +6,6 @@
   "description": "Opinionated formatting for your notes.",
   "isDesktopOnly": false,
   "minAppVersion": "0.10.12",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "js": "main.js"
 }
